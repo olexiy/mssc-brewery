@@ -15,7 +15,12 @@
 	<description>Demo project for Spring Cloud</description>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputreporting>UTF-8</project.reporting.outputreporting>
 		<java.version>11</java.version>
+		<jaxb.version>2.3.0</jaxb.version>
+		<maven.compiler.source>$java.version</maven.compiler.source>
+		<maven.compiler.target>$java.version</maven.compiler.target>
 	</properties>
 
 	<dependencies>
