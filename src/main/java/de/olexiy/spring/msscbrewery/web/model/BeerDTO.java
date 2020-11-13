@@ -1,13 +1,10 @@
 package de.olexiy.spring.msscbrewery.web.model;
 
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.util.UUID;
 
 /**
  * @author Olexiy Sokurenko <ol.sakura@gmail.com>
@@ -17,19 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDto {
-
+public class BeerDTO {
     private UUID id;
-    private Integer version;
-
-    private OffsetDateTime createdDate;
-    private OffsetDateTime lastModifiedDate;
-
     private String beerName;
-    private BeerStyleenum beerStyle;
+    private String beerStyle;
     private Long upc;
-    private BigDecimal price;
-    private Integer quantityOnHand;
-
-
 }

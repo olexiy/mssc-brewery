@@ -1,11 +1,10 @@
 package de.olexiy.spring.msscbrewery.web.services.impl;
 
-import de.olexiy.spring.msscbrewery.web.model.BeerDto;
+import de.olexiy.spring.msscbrewery.web.model.BeerDTO;
 import de.olexiy.spring.msscbrewery.web.services.BeerService;
+import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 /**
  * @author Olexiy Sokurenko <ol.sakura@gmail.com>
@@ -15,17 +14,17 @@ import java.util.UUID;
 @Service
 public class BeerServiceImpl implements BeerService {
     @Override
-    public BeerDto getBeerById(UUID beerId) {
-        return BeerDto.builder().id(beerId).beerName("Duff").build();
+    public BeerDTO getBeerById(UUID beerId) {
+        return BeerDTO.builder().id(beerId).beerName("Duff").beerStyle("IPA").upc(1454324L).build();
     }
 
     @Override
-    public BeerDto saveNewBeer(BeerDto beerDto) {
-        return BeerDto.builder().id(UUID.randomUUID()).build();
+    public BeerDTO saveNewBeer(BeerDTO beerDto) {
+        return BeerDTO.builder().id(UUID.randomUUID()).build();
     }
 
     @Override
-    public void updateBeer(UUID beerId, BeerDto beerDto) {
+    public void updateBeer(UUID beerId, BeerDTO beerDto) {
         /* TODO : implement later */
     }
 
