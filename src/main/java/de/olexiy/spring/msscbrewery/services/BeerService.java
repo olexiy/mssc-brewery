@@ -1,4 +1,4 @@
-package de.olexiy.spring.msscbrewery.web.services;
+package de.olexiy.spring.msscbrewery.services;
 
 import de.olexiy.spring.msscbrewery.web.model.BeerDTO;
 import java.util.UUID;

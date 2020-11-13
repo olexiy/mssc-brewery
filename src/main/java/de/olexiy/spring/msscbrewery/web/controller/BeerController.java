@@ -1,8 +1,9 @@
 package de.olexiy.spring.msscbrewery.web.controller;
 
+import de.olexiy.spring.msscbrewery.services.BeerService;
 import de.olexiy.spring.msscbrewery.web.model.BeerDTO;
-import de.olexiy.spring.msscbrewery.web.services.BeerService;
 import java.util.UUID;
+import javax.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,16 +37,16 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity<BeerDTO> saveNewBeer(@RequestBody BeerDTO beerDto) {
+    public ResponseEntity<BeerDTO> saveNewBeer(@Valid @RequestBody BeerDTO beerDto) {
         BeerDTO savedDto = beerService.saveNewBeer(beerDto);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "/api/v1/beer/" + savedDto.getId().toString());
+        headers.add("Location", "/api/v1/beer/" + UUID.randomUUID().toString());
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @PutMapping("/{beerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateBeerById(@PathVariable("beerId") UUID beerId, @RequestBody BeerDTO beerDto) {
+    public void updateBeerById(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDTO beerDto) {
         beerService.updateBeer(beerId, beerDto);
     }
 
@@ -54,4 +55,6 @@ public class BeerController {
     public void deleteBeer(@PathVariable("beerId") UUID beerId) {
         beerService.deleteById(beerId);
     }
+
+
 }

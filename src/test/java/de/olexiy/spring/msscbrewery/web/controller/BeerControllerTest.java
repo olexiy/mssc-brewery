@@ -9,8 +9,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.olexiy.spring.msscbrewery.services.BeerService;
 import de.olexiy.spring.msscbrewery.web.model.BeerDTO;
-import de.olexiy.spring.msscbrewery.web.services.BeerService;
+import de.olexiy.spring.msscbrewery.web.model.BeerStyleEnum;
+import java.math.BigDecimal;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +42,7 @@ class BeerControllerTest {
 
   @Test
   void saveNewBeer() throws Exception {
-    BeerDTO beerDto = BeerDTO.builder().build();
+    BeerDTO beerDto = getValidBeerDto();
     String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
     given(beerService.saveNewBeer(any())).willReturn(getValidBeerDto());
@@ -53,7 +55,7 @@ class BeerControllerTest {
 
   @Test
   void updateBeerById() throws Exception {
-    BeerDTO beerDto = BeerDTO.builder().build();
+    BeerDTO beerDto = getValidBeerDto();
     String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
     given(beerService.saveNewBeer(any())).willReturn(getValidBeerDto());
@@ -71,10 +73,10 @@ class BeerControllerTest {
 
   BeerDTO getValidBeerDto() {
     return BeerDTO.builder()
-        .id(UUID.randomUUID())
         .beerName("My Beer")
-        .beerStyle("ALE")
-        .upc(1L)
+        .beerStyle(BeerStyleEnum.ALE)
+        .price(new BigDecimal("9.99"))
+        .upc(123452345L)
         .build();
   }
 }
