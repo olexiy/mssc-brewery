@@ -1,12 +1,12 @@
 package de.olexiy.spring.msscbrewery.web.mappers;
 
 import de.olexiy.spring.msscbrewery.domain.Beer;
-import de.olexiy.spring.msscbrewery.web.model.BeerDTO;
+import de.olexiy.spring.msscbrewery.web.model.BeerDto;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(uses = {DateMapper.class})
 public interface BeerMapper {
-  BeerDTO beerToBeerDTO(Beer beer);
+  BeerDto beerToBeerDTO(Beer beer);
 
-  Beer beerDTOToBeer(BeerDTO beerDTO);
+  Beer beerDTOToBeer(BeerDto beerDTO);
 }

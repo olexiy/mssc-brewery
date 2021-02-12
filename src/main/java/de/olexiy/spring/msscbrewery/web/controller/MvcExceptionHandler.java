@@ -1,5 +1,6 @@
 package de.olexiy.spring.msscbrewery.web.controller;
 
+import java.net.BindException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.ConstraintViolationException;
@@ -15,8 +16,13 @@ public class MvcExceptionHandler {
     List<String> errors = new ArrayList<>(e.getConstraintViolations().size());
 
     e.getConstraintViolations().forEach(constraintViolation -> {
-      errors.add(constraintViolation.getPropertyPath() + ":" + constraintViolation.getMessage());
+      errors.add(constraintViolation.getPropertyPath() + " : " + constraintViolation.getMessage());
     });
     return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(BindException.class)
+  public ResponseEntity<String> bindErrorHandler(BindException e) {
+    return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
   }
 }

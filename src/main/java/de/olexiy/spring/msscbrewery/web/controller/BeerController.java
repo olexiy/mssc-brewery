@@ -1,12 +1,14 @@
 package de.olexiy.spring.msscbrewery.web.controller;
 
 import de.olexiy.spring.msscbrewery.services.BeerService;
-import de.olexiy.spring.msscbrewery.web.model.BeerDTO;
+import de.olexiy.spring.msscbrewery.web.model.BeerDto;
 import java.util.UUID;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Olexiy Sokurenko <ol.sakura@gmail.com>
  * Date: 15.07.2020
  */
+@Validated
 @RestController
 @RequestMapping("/api/v1/beer")
 public class BeerController {
@@ -32,13 +35,13 @@ public class BeerController {
     }
 
     @GetMapping("/{beerId}")
-    public ResponseEntity<BeerDTO> getBeerById(@PathVariable("beerId") UUID beerId) {
+    public ResponseEntity<BeerDto> getBeerById(@NotNull @PathVariable("beerId") UUID beerId) {
         return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<BeerDTO> saveNewBeer(@Valid @RequestBody BeerDTO beerDto) {
-        BeerDTO savedDto = beerService.saveNewBeer(beerDto);
+    public ResponseEntity<BeerDto> saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
+        BeerDto savedDto = beerService.saveNewBeer(beerDto);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/api/v1/beer/" + UUID.randomUUID().toString());
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
@@ -46,7 +49,7 @@ public class BeerController {
 
     @PutMapping("/{beerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateBeerById(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDTO beerDto) {
+    public void updateBeerById(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto) {
         beerService.updateBeer(beerId, beerDto);
     }
 
@@ -55,6 +58,5 @@ public class BeerController {
     public void deleteBeer(@PathVariable("beerId") UUID beerId) {
         beerService.deleteById(beerId);
     }
-
 
 }

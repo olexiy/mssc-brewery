@@ -1,6 +1,6 @@
 package de.olexiy.spring.msscbrewery.services;
 
-import de.olexiy.spring.msscbrewery.web.model.BeerDTO;
+import de.olexiy.spring.msscbrewery.web.model.BeerDto;
 import java.util.UUID;
 
 /**
@@ -8,11 +8,11 @@ import java.util.UUID;
  * Date: 15.07.2020
  */
 public interface BeerService {
-    BeerDTO getBeerById(UUID beerId);
+  BeerDto getBeerById(UUID beerId);
 
-    BeerDTO saveNewBeer(BeerDTO beerDto);
+  BeerDto saveNewBeer(BeerDto beerDto);
 
-    void updateBeer(UUID beerId, BeerDTO beerDto);
+  void updateBeer(UUID beerId, BeerDto beerDto);
 
     void deleteById(UUID beerId);
 }
